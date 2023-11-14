@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">mobileApp</string>
+    <string name="cart">Giỏ hàng của bạn</string>
+    <string name="Cartgories">Tất cả danh mục</string>
+</resources>
