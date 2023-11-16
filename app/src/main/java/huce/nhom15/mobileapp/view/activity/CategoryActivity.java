@@ -1,4 +1,4 @@
-package huce.nhom15.mobileapp.view;
+package huce.nhom15.mobileapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

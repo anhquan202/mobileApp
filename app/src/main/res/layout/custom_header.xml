@@ -28,7 +28,7 @@
         android:layout_marginLeft="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/tvHeader"
+        app:layout_constraintRight_toLeftOf="@+id/tvHeader"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow_left_solid"
         android:tint="@color/text"/>

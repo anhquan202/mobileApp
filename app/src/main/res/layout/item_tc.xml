@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="SanPhamViewModel"
+            type="huce.nhom15.mobileapp.view.viewmodel.SanPhamViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_TC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:onClick="@{(view)->SanPhamViewModel.onclickItem_TC(view,SanPhamViewModel)}"
+                >
+
+                <ImageView
+                    android:id="@+id/img_sanpham"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="5dp"
+                    app:img_url="@{SanPhamViewModel.anhsp}"
+                    android:adjustViewBounds="true"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_tensp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:gravity="center"
+                    android:text="@{SanPhamViewModel.tensp}"
+                    android:textColor="#101010"
+                    android:textSize="15sp"
+                    android:background="#E1DDDD"/>
+
+                <TextView
+                    android:id="@+id/tv_giasp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{SanPhamViewModel.giasp}"
+                    android:textColor="#f20"
+                    android:textSize="15sp"
+                    android:background="#E1DDDD"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+</layout>
