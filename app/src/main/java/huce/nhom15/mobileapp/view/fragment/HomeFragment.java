@@ -1,6 +1,5 @@
 package huce.nhom15.mobileapp.view.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -19,7 +18,7 @@ import java.util.List;
 import huce.nhom15.mobileapp.R;
 import huce.nhom15.mobileapp.view.API.IApiService;
 import huce.nhom15.mobileapp.view.adapter.SanPhamTCAdapter;
-import huce.nhom15.mobileapp.view.viewmodel.SanPhamViewModel;
+import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

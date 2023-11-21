@@ -27,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottom_nav = findViewById(R.id.bottom_nav);
         mViewPager2 = findViewById(R.id.view_pager);
-//        ConstraintLayout cl = findViewById(R.id.main);
-//        TextView tv = cl.findViewById(R.id.tvHeader);
-//        tv.setText(getString(R.string.Cartgories));
-        //View arrowleft = findViewById(R.id.arrowLeft);
         setUpViewPage();
 
         mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

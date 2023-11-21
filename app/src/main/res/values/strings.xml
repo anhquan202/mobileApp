@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">mobileApp</string>
     <string name="cart">Giỏ hàng của bạn</string>
-    <string name="Cartgories">Tất cả danh mục</string>
+    <string name="cartgories">Tất cả danh mục</string>
+    <string name="txtLogin">ĐĂNG NHẬP</string>
+    <string name="txtSignup">ĐĂNG KÝ</string>
+    <string name="txtforgotPass">Quên mật khẩu</string>
+    <string name="invalidAccount">Bạn chưa có tài khoản</string>
+
     <string name="home">Trang chủ</string>
     <string name="category">Danh mục</string>
     <string name="order">Đơn hàng</string>

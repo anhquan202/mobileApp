@@ -6,4 +6,7 @@
     <color name="placehoder">#CCCCCC</color>
     <color name="icon">#CCCCCC</color>
     <color name="text">#FFFFFFFF</color>
+    <color name="facebook">#0000FF</color>
+    <color name="gg_plus">#BFFF0000</color>
+    <color name="black">#FF000000</color>
 </resources>
