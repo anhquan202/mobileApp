@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import huce.nhom15.mobileapp.R;
 import huce.nhom15.mobileapp.databinding.ItemTcBinding;
-import huce.nhom15.mobileapp.view.viewmodel.SanPhamViewModel;
+import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 
 import java.util.List;
 

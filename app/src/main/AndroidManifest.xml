@@ -19,11 +19,20 @@
             android:name=".view.activity.SearchActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activity.CategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.ChiTietSPActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.CategoryActivity"
-            android:exported="false" />
+            android:name=".view.activity.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activity.SignupActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activity.Emptyaccount"
+            android:exported="true" />
         <activity
             android:name=".view.activity.MainActivity"
             android:exported="true"

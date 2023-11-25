@@ -13,7 +13,7 @@ import java.util.List;
 
 import huce.nhom15.mobileapp.databinding.ItemCategoryBinding;
 import huce.nhom15.mobileapp.databinding.ItemTcBinding;
-import huce.nhom15.mobileapp.view.viewmodel.CategoryViewModel;
+import huce.nhom15.mobileapp.viewmodel.CategoryViewModel;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHodel> {
     private List<CategoryViewModel> categoryViewModels;

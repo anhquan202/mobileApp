@@ -26,8 +26,8 @@ import huce.nhom15.mobileapp.view.PaginationScrollListener;
 import huce.nhom15.mobileapp.view.adapter.ProductCategoryAdapter;
 
 import huce.nhom15.mobileapp.view.adapter.SanPhamSearchAdapter;
-import huce.nhom15.mobileapp.view.viewmodel.CategoryViewModel;
-import huce.nhom15.mobileapp.view.viewmodel.SanPhamViewModel;
+import huce.nhom15.mobileapp.viewmodel.CategoryViewModel;
+import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

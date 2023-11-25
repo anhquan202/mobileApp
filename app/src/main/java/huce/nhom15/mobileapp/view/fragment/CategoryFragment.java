@@ -22,7 +22,7 @@ import java.util.List;
 import huce.nhom15.mobileapp.R;
 import huce.nhom15.mobileapp.view.API.IApiService;
 import huce.nhom15.mobileapp.view.adapter.CategoryAdapter;
-import huce.nhom15.mobileapp.view.viewmodel.CategoryViewModel;
+import huce.nhom15.mobileapp.viewmodel.CategoryViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,4 +1,4 @@
-package huce.nhom15.mobileapp.view.viewmodel;
+package huce.nhom15.mobileapp.viewmodel;
 
 import android.content.Intent;
 import android.os.Bundle;

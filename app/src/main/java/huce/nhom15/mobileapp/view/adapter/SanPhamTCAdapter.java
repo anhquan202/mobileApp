@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import huce.nhom15.mobileapp.databinding.ItemTcBinding;
-import huce.nhom15.mobileapp.view.viewmodel.SanPhamViewModel;
+import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 
 public class SanPhamTCAdapter extends RecyclerView.Adapter<SanPhamTCAdapter.SanPhamTCViewHodel> {
     private List<SanPhamViewModel> SanPhams;
