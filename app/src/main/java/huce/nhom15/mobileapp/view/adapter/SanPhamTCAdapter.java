@@ -30,6 +30,7 @@ public class SanPhamTCAdapter extends RecyclerView.Adapter<SanPhamTCAdapter.SanP
 
     @Override
     public void onBindViewHolder(@NonNull SanPhamTCViewHodel holder, int position) {
+        if(SanPhams == null) return;
         sanPhamViewModel = SanPhams.get(position);
         holder.itemTcBinding.setSanPhamViewModel(sanPhamViewModel);
     }

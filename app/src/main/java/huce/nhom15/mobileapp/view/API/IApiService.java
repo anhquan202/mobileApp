@@ -52,4 +52,6 @@ public interface IApiService {
             @Field("KH_Email") String email,
             @Field("KH_Password") String password
     );
+    @GET("searchSPByName.php")
+    Call<List<SanPhamViewModel>> getListSanPhamSearch(String tensp, int currentPage);
 }

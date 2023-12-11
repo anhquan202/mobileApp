@@ -28,7 +28,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new HomeFragment(ct);
             case 1:
-                return new CategoryFragment();
+                return new CategoryFragment(ct);
             case 2:
                 return new OrderFragment();
             case 3:

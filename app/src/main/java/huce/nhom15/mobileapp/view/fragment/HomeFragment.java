@@ -1,22 +1,29 @@
 package huce.nhom15.mobileapp.view.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import huce.nhom15.mobileapp.R;
 import huce.nhom15.mobileapp.view.API.IApiService;
+import huce.nhom15.mobileapp.view.activity.SearchActivity;
 import huce.nhom15.mobileapp.view.adapter.SanPhamTCAdapter;
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
@@ -30,20 +37,51 @@ public class HomeFragment extends Fragment {
     private SanPhamTCAdapter sanPhamTCAdapter;
     private Context ct;
     private ProgressBar progressBar;
+    private EditText edtsearch;
     public HomeFragment(Context ct) {
         this.ct = ct;
     }
+
+    public HomeFragment() {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         rcv_tc = view.findViewById(R.id.rcv_TC);
+        edtsearch = view.findViewById(R.id.edtsearch);
         progressBar = view.findViewById(R.id.progressBar_TC);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ct, 2);
         rcv_tc.setLayoutManager(gridLayoutManager);
         callApi();
+        timKiemSanPham();
         return view;
     }
+
+    private void timKiemSanPham() {
+        edtsearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
+
+                    String enteredText = edtsearch.getText().toString();
+                    InputMethodManager imm = (InputMethodManager) ct.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(edtsearch.getWindowToken(), 0);
+                    Intent in = new Intent(ct, SearchActivity.class);
+                    in.putExtra("tensp", enteredText);
+                    edtsearch.setText("");
+                    edtsearch.clearFocus();
+                    startActivity(in);
+                    // Trả về true để báo rằng bạn đã xử lý sự kiện
+                    return true;
+                }
+                // Trả về false để cho phép xử lý mặc định của EditText
+                return false;
+            }
+        });
+    }
+
     private void callApi(){
         progressBar.setVisibility(View.VISIBLE);
         IApiService.api.getListSanPham().enqueue(new Callback<List<SanPhamViewModel>>() {
