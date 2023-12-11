@@ -9,6 +9,7 @@ import java.util.List;
 import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.ModelRespone.LoginRespone;
 import huce.nhom15.mobileapp.view.ModelRespone.RegisterRespone;
+import huce.nhom15.mobileapp.view.ModelRespone.SetNewPassRespone;
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -22,7 +23,7 @@ import retrofit2.http.Query;
 public interface IApiService {
     Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
     IApiService api = new Retrofit.Builder()
-            .baseUrl("http://192.168.98.91:8081/backend/")
+            .baseUrl("http://192.168.98.27:8081/backend/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IApiService.class);
@@ -42,6 +43,12 @@ public interface IApiService {
             @Field("KH_HoTen") String username,
             @Field("KH_SDT") String phone,
             @Field("KH_GioiTinh") String gender,
+            @Field("KH_Email") String email,
+            @Field("KH_Password") String password
+    );
+    @FormUrlEncoded
+    @POST("setNewPassword.php")
+    Call<SetNewPassRespone> setnewpwd(
             @Field("KH_Email") String email,
             @Field("KH_Password") String password
     );

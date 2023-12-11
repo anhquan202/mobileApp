@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/dangki"
+    android:id="@+id/registerLayout"
     android:background="@drawable/background"
     tools:context=".view.activity.SignupActivity">
 
@@ -26,7 +26,7 @@
         android:paddingStart="20dp"
         android:hint="Họ tên"
         android:background="@color/button"
-        android:textColorHint="@color/placehoder"
+        android:textColorHint="@color/placeholder"
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/header"
@@ -45,7 +45,7 @@
         android:paddingStart="20dp"
         android:hint="Số điện thoại"
         android:background="@color/button"
-        android:textColorHint="@color/placehoder"
+        android:textColorHint="@color/placeholder"
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/edUsername"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Giới tính"
-            android:textColorHint="@color/placehoder"
+            android:textColorHint="@color/placeholder"
             android:textSize="18sp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -82,7 +82,7 @@
             android:layout_marginEnd="20dp"
             android:checked="true"
             android:text="Nam"
-            android:textColor="@color/placehoder"
+            android:textColor="@color/placeholder"
             />
 
         <RadioButton
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nữ"
-            android:textColor="@color/placehoder" />
+            android:textColor="@color/placeholder" />
     </RadioGroup>
     <EditText
         android:id="@+id/edEmail"
@@ -104,7 +104,7 @@
         android:paddingStart="20dp"
         android:hint="Email"
         android:background="@color/button"
-        android:textColorHint="@color/placehoder"
+        android:textColorHint="@color/placeholder"
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/rdGender"
@@ -123,7 +123,7 @@
         android:paddingStart="20dp"
         android:hint="Password"
         android:background="@color/button"
-        android:textColorHint="@color/placehoder"
+        android:textColorHint="@color/placeholder"
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/edEmail"
