@@ -1,9 +1,9 @@
 package huce.nhom15.mobileapp.viewmodel;
 
-import android.content.Intent;
-import android.os.Bundle;
+
 import android.view.View;
 import android.widget.ImageView;
+
 
 import androidx.databinding.BindingAdapter;
 
@@ -12,24 +12,33 @@ import com.bumptech.glide.Glide;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-import huce.nhom15.mobileapp.view.activity.ChiTietSPActivity;
 
-public class SanPhamViewModel implements Serializable{
+
+public class GioHangViewModel implements Serializable{
     private String id;
     private String anhsp;
     private String tensp;
     private String giasp;
     private String soluong;
-
-    public SanPhamViewModel() {
+    private String soluongban;
+    public GioHangViewModel() {
     }
 
-    public SanPhamViewModel(String id, String anhsp, String tensp, String giasp, String soluong) {
+    public GioHangViewModel(String id, String anhsp, String tensp, String giasp, String soluong, String soluongban) {
         this.id = id;
         this.anhsp = anhsp;
         this.tensp = tensp;
         this.giasp = giasp;
         this.soluong = soluong;
+        this.soluongban = soluongban;
+    }
+
+    public String getSoluongban() {
+        return soluongban;
+    }
+
+    public void setSoluongban(String soluongban) {
+        this.soluongban = soluongban;
     }
 
     public String getId() {
@@ -87,11 +96,7 @@ public class SanPhamViewModel implements Serializable{
         Glide.with(view.getContext()).load(url).into(view);
     }
 
-    public void onclickItem_TC(View view, SanPhamViewModel sanPhamViewModel){
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("SP", sanPhamViewModel);
-        Intent in =new Intent(view.getContext(), ChiTietSPActivity.class);
-        in.putExtras(bundle);
-        view.getContext().startActivity(in);
+    public void onLongClickItem(View view){
+
     }
 }

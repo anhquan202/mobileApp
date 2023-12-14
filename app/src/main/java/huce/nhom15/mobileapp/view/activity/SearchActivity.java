@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -50,7 +51,7 @@ public class SearchActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean productNotFound = true;
     private ScrollView scrollView;
-    private ImageView pNotFound;
+    private ImageView pNotFound, imgGioHang;
     private FrameLayout foundProduct;
 
     @Override
@@ -61,13 +62,27 @@ public class SearchActivity extends AppCompatActivity {
         back();
         tensp = getIntent().getStringExtra("tensp");
         edtsearch.setText(tensp);
+        edtsearch.clearFocus();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         rcvSearch.setLayoutManager(gridLayoutManager);
         ct = this;
         callApi(tensp, currentPage);
         editorEditText();
         recycleViewScroll(gridLayoutManager);
+
+        clickGioHang();
     }
+
+    private void clickGioHang() {
+        imgGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(SearchActivity.this, GioHangActivity.class);
+                startActivity(in);
+            }
+        });
+    }
+
     private void recycleViewScroll(GridLayoutManager gridLayoutManager) {
         rcvSearch.clearOnScrollListeners();
         rcvSearch.addOnScrollListener(new PaginationScrollListener(gridLayoutManager) {
@@ -96,6 +111,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
                     InputMethodManager imm = (InputMethodManager) edtsearch.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(edtsearch.getWindowToken(), 0);
+                    edtsearch.clearFocus();
                     currentPage = 1;
                     isLoading=false;
                     isLastPage=false;
@@ -188,5 +204,6 @@ public class SearchActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView);
         pNotFound = findViewById(R.id.productnotfound);
         foundProduct = findViewById(R.id.foundproduct);
+        imgGioHang = findViewById(R.id.include).findViewById(R.id.imgGioHang);
     }
 }

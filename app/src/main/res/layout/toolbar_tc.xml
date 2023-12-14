@@ -37,6 +37,7 @@
             >
         </EditText>
         <ImageView
+            android:id="@+id/imgGioHang"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="1"

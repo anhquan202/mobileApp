@@ -8,6 +8,7 @@ import java.util.List;
 import huce.nhom15.mobileapp.view.ModelRespone.LoginRespone;
 import huce.nhom15.mobileapp.view.ModelRespone.RegisterRespone;
 import huce.nhom15.mobileapp.viewmodel.CategoryViewModel;
+import huce.nhom15.mobileapp.viewmodel.ChiTietSPViewModel;
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -35,6 +36,9 @@ public interface IApiService {
     Call<List<CategoryViewModel>> getListCategory();
     @GET("getListProductCategory.php")
     Call<List<SanPhamViewModel>> getListProductCategory(@Query("LSP_MaLoai") int maLoai, @Query("page") int page);
+
+    @GET("getThongTinCTSP.php")
+    Call<ChiTietSPViewModel> getThongTinCTSP(@Query("SP_MaSP") int maSP);
 
     @FormUrlEncoded
     @POST("login.php")
