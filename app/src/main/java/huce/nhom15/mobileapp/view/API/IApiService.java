@@ -3,12 +3,15 @@ package huce.nhom15.mobileapp.view.API;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Currency;
 import java.util.List;
 
+import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.ModelRespone.LoginRespone;
 import huce.nhom15.mobileapp.view.ModelRespone.RegisterRespone;
 import huce.nhom15.mobileapp.viewmodel.CategoryViewModel;
 import huce.nhom15.mobileapp.viewmodel.ChiTietSPViewModel;
+import huce.nhom15.mobileapp.view.ModelRespone.SetNewPassRespone;
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -39,7 +42,6 @@ public interface IApiService {
 
     @GET("getThongTinCTSP.php")
     Call<ChiTietSPViewModel> getThongTinCTSP(@Query("SP_MaSP") int maSP);
-
     @FormUrlEncoded
     @POST("login.php")
     Call<LoginRespone> login(
@@ -56,4 +58,12 @@ public interface IApiService {
             @Field("KH_Email") String email,
             @Field("KH_Password") String password
     );
+    @FormUrlEncoded
+    @POST("setNewPassword.php")
+    Call<SetNewPassRespone> setnewpwd(
+            @Field("KH_Email") String email,
+            @Field("KH_Password") String password
+    );
+    //@GET("searchSPByName.php")
+    //Call<List<SanPhamViewModel>> getListSanPhamSearch(String tensp, int currentPage);
 }
