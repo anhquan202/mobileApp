@@ -9,7 +9,10 @@ import java.util.List;
 import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.ModelRespone.LoginRespone;
 import huce.nhom15.mobileapp.view.ModelRespone.RegisterRespone;
+<<<<<<< HEAD
 import huce.nhom15.mobileapp.view.ModelRespone.SetNewPassRespone;
+=======
+>>>>>>> 372c82f (Update project)
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -23,7 +26,11 @@ import retrofit2.http.Query;
 public interface IApiService {
     Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
     IApiService api = new Retrofit.Builder()
+<<<<<<< HEAD
             .baseUrl("http://192.168.98.27:8081/backend/")
+=======
+            .baseUrl("http://192.168.98.91:8081/backend/")
+>>>>>>> 372c82f (Update project)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IApiService.class);
@@ -46,6 +53,7 @@ public interface IApiService {
             @Field("KH_Email") String email,
             @Field("KH_Password") String password
     );
+<<<<<<< HEAD
     @FormUrlEncoded
     @POST("setNewPassword.php")
     Call<SetNewPassRespone> setnewpwd(
@@ -54,4 +62,6 @@ public interface IApiService {
     );
     @GET("searchSPByName.php")
     Call<List<SanPhamViewModel>> getListSanPhamSearch(String tensp, int currentPage);
+=======
+>>>>>>> 372c82f (Update project)
 }

@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">mobileApp</string>
     <string name="cart">Giỏ hàng của bạn</string>
+<<<<<<< HEAD
     <string name="categories">Tất cả danh mục</string>
     <string name="txtLogin">ĐĂNG NHẬP</string>
     <string name="txtSignup">ĐĂNG KÝ</string>
     <string name="txtforgotPass">QUÊN MẬT KHẨU</string>
     <string name="invalidAccount">BẠN CHƯA CÓ TÀI KHOẢN</string>
     <string name="setpwdSuccess">THAY ĐỔI MẬT KHẨU</string>
+=======
+    <string name="cartgories">Tất cả danh mục</string>
+    <string name="txtLogin">ĐĂNG NHẬP</string>
+    <string name="txtSignup">ĐĂNG KÝ</string>
+    <string name="txtforgotPass">Quên mật khẩu</string>
+    <string name="invalidAccount">Bạn chưa có tài khoản</string>
+
+>>>>>>> 372c82f (Update project)
     <string name="home">Trang chủ</string>
     <string name="category">Danh mục</string>
     <string name="order">Đơn hàng</string>
