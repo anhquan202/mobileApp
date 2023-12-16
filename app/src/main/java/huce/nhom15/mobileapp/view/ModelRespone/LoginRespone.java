@@ -1,22 +1,10 @@
 package huce.nhom15.mobileapp.view.ModelRespone;
 
-<<<<<<< HEAD
 public class LoginRespone {
 
     public LoginRespone(String error, String message) {
         this.error = error;
         this.message = message;
-=======
-import huce.nhom15.mobileapp.model.Customer;
-
-public class LoginRespone {
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
->>>>>>> 372c82f (Update project)
     }
 
     public String getError() {
@@ -35,7 +23,6 @@ public class LoginRespone {
         this.message = message;
     }
 
-<<<<<<< HEAD
 
 
     String error;
@@ -48,15 +35,7 @@ public class LoginRespone {
         return user;
 
     }
-=======
-    public LoginRespone(Customer customer, String error, String message) {
-        this.customer = customer;
-        this.error = error;
-        this.message = message;
-    }
 
-    Customer customer;
-    String error, message;
 
->>>>>>> 372c82f (Update project)
+
 }
