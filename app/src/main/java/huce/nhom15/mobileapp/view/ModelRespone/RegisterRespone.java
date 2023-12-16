@@ -1,7 +1,6 @@
 package huce.nhom15.mobileapp.view.ModelRespone;
 
 public class RegisterRespone {
-<<<<<<< HEAD
     public String getUsername() {
         return username;
     }
@@ -11,8 +10,6 @@ public class RegisterRespone {
     }
 
     String username;
-=======
->>>>>>> 372c82f (Update project)
     public String getMessage() {
         return message;
     }

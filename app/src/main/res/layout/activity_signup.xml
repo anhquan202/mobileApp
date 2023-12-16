@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:id="@+id/registerLayout"
-=======
-    android:id="@+id/dangki"
->>>>>>> 372c82f (Update project)
     android:background="@drawable/background"
     tools:context=".view.activity.SignupActivity">
 
@@ -30,11 +26,7 @@
         android:paddingStart="20dp"
         android:hint="Họ tên"
         android:background="@color/button"
-<<<<<<< HEAD
         android:textColorHint="@color/placeholder"
-=======
-        android:textColorHint="@color/placehoder"
->>>>>>> 372c82f (Update project)
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/header"
@@ -53,11 +45,7 @@
         android:paddingStart="20dp"
         android:hint="Số điện thoại"
         android:background="@color/button"
-<<<<<<< HEAD
         android:textColorHint="@color/placeholder"
-=======
-        android:textColorHint="@color/placehoder"
->>>>>>> 372c82f (Update project)
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/edUsername"
@@ -80,11 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Giới tính"
-<<<<<<< HEAD
             android:textColorHint="@color/placeholder"
-=======
-            android:textColorHint="@color/placehoder"
->>>>>>> 372c82f (Update project)
             android:textSize="18sp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -98,11 +82,7 @@
             android:layout_marginEnd="20dp"
             android:checked="true"
             android:text="Nam"
-<<<<<<< HEAD
             android:textColor="@color/placeholder"
-=======
-            android:textColor="@color/placehoder"
->>>>>>> 372c82f (Update project)
             />
 
         <RadioButton
@@ -110,11 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nữ"
-<<<<<<< HEAD
             android:textColor="@color/placeholder" />
-=======
-            android:textColor="@color/placehoder" />
->>>>>>> 372c82f (Update project)
     </RadioGroup>
     <EditText
         android:id="@+id/edEmail"
@@ -128,11 +104,7 @@
         android:paddingStart="20dp"
         android:hint="Email"
         android:background="@color/button"
-<<<<<<< HEAD
         android:textColorHint="@color/placeholder"
-=======
-        android:textColorHint="@color/placehoder"
->>>>>>> 372c82f (Update project)
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/rdGender"
@@ -151,11 +123,7 @@
         android:paddingStart="20dp"
         android:hint="Password"
         android:background="@color/button"
-<<<<<<< HEAD
         android:textColorHint="@color/placeholder"
-=======
-        android:textColorHint="@color/placehoder"
->>>>>>> 372c82f (Update project)
         android:textColor="@color/text"
         android:focusableInTouchMode="true"
         app:layout_constraintTop_toBottomOf="@id/edEmail"
@@ -172,7 +140,7 @@
         android:text="@string/txtSignup"
         android:textColor="@color/text"
         android:background="@drawable/radius"
-        android:backgroundTint="@color/button"
+        app:backgroundTint="@color/button"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/edPassword"
         app:layout_constraintLeft_toLeftOf="parent"
