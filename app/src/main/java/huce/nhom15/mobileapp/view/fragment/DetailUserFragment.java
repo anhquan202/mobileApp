@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
         linearLayoutCompat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 logout();
+                 onLogout();
             }
         });
         txtUsername = view.findViewById(R.id.txtusername);
@@ -42,8 +43,8 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
         return view;
     }
 
-    private void logout() {
-         //Xóa trạng thái đăng nhập khi logout
+    @Override
+    public void onLogout() {
         clearLoginState();
         clearRegisterState();
         if (logoutListener != null) {
@@ -60,9 +61,13 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
     }
 
     private void popBackStackToUserFragment() {
-        // Sử dụng FragmentManager để quay lại UserFragment
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.popBackStack("UserFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        UserFragment userFragment = new UserFragment();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.blankaccount, userFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
     private void clearRegisterState() {
         SharedPreferences.Editor editor = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
@@ -78,8 +83,5 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
         SharedPreferences prefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         return prefs.getString("username", "");
     }
-    @Override
-    public void onLogout() {
 
-    }
 }

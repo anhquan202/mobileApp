@@ -47,11 +47,6 @@ public class LoginActivity extends AppCompatActivity{
                 return false;
             }
         });
-        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        if (prefs.getBoolean("isLoggedIn", false)) {
-            // Nếu đã đăng nhập, xóa giá trị username
-            clearUsername();
-        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
