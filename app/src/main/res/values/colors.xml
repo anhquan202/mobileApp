@@ -6,6 +6,9 @@
     <color name="placeholder">#CCCCCC</color>
     <color name="icon">#CCCCCC</color>
     <color name="text">#FFFFFFFF</color>
+    <color name="white">#F1ECEC</color>
+    <color name="backgroud_header">#1772F1</color>
+    <color name="backgroud_body">#D7B6E3</color>
     <color name="facebook">#0000FF</color>
     <color name="gg_plus">#BFFF0000</color>
     <color name="black">#FF000000</color>

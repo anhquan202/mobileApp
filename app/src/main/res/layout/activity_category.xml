@@ -7,7 +7,7 @@
     tools:context=".view.activity.CategoryActivity">
 
     <include
-        layout="@layout/header_sanpham_category"
+        layout="@layout/custom_header"
         app:layout_constraintTop_toTopOf="parent" />
     <ScrollView
         android:id="@+id/scrollView"

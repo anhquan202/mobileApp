@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import huce.nhom15.mobileapp.R;
 import huce.nhom15.mobileapp.view.API.IApiService;
+import huce.nhom15.mobileapp.view.activity.GioHangActivity;
 import huce.nhom15.mobileapp.view.activity.SearchActivity;
 import huce.nhom15.mobileapp.view.adapter.SanPhamTCAdapter;
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
@@ -38,6 +40,7 @@ public class HomeFragment extends Fragment {
     private Context ct;
     private ProgressBar progressBar;
     private EditText edtsearch;
+    private ImageView imgGioHang;
     public HomeFragment(Context ct) {
         this.ct = ct;
     }
@@ -52,9 +55,17 @@ public class HomeFragment extends Fragment {
         rcv_tc = view.findViewById(R.id.rcv_TC);
         edtsearch = view.findViewById(R.id.edtsearch);
         progressBar = view.findViewById(R.id.progressBar_TC);
+        imgGioHang = view.findViewById(R.id.toolbarTC).findViewById(R.id.imgGioHang);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ct, 2);
         rcv_tc.setLayoutManager(gridLayoutManager);
         callApi();
+        imgGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(ct, GioHangActivity.class);
+                startActivity(in);
+            }
+        });
         timKiemSanPham();
         return view;
     }

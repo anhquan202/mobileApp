@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#1772F1"
         android:gravity="center"
-        android:text="@string/category_header"
+        android:text="@string/category"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleHeaderCategory"
-        android:background="#635A13CC">
+        android:background="@color/backgroud_body">
         <ProgressBar
             android:id="@+id/progressBarCategory"
             android:layout_width="wrap_content"
