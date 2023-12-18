@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     public boolean login() {
-        init();
+        //init();
         String email = edUserEmail.getText().toString().trim();
         String password = edPassword.getText().toString().trim();
         if (email.isEmpty() || password.isEmpty()) {
@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity{
                     if (loginRespone.getError().equals("200")) {
                         String username = loginRespone.getUser().toString();
                         Toast.makeText(LoginActivity.this, loginRespone.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, username, Toast.LENGTH_SHORT).show();
                         saveLoginState();
                         saveUsername(username);
                         finish();
@@ -127,7 +128,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onFailure(Call<LoginRespone> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                Log.e("error", t.getMessage());
             }
         });
     }

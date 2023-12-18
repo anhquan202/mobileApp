@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -92,5 +94,14 @@ public class MainActivity extends AppCompatActivity {
     private void setUpViewPage() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         mViewPager2.setAdapter(viewPagerAdapter);
+    }
+
+    private String getUserName() {
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return prefs.getString("username", "");
+    }
+    private boolean checkLogin() {
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return prefs.getBoolean("isLoggedIn", false);
     }
 }
