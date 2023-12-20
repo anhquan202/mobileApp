@@ -140,7 +140,7 @@
         android:text="@string/txtSignup"
         android:textColor="@color/text"
         android:background="@drawable/radius"
-        android:backgroundTint="@color/button"
+        app:backgroundTint="@color/button"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/edPassword"
         app:layout_constraintLeft_toLeftOf="parent"

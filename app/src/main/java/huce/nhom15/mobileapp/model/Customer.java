@@ -52,5 +52,16 @@ public class Customer {
     int KH_MaKH;
     String KH_HoTen, KH_SDT, KH_GioiTinh, KH_Email, KH_Password;
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "KH_MaKH=" + KH_MaKH +
+                ", KH_HoTen='" + KH_HoTen + '\'' +
+                ", KH_SDT='" + KH_SDT + '\'' +
+                ", KH_GioiTinh='" + KH_GioiTinh + '\'' +
+                ", KH_Email='" + KH_Email + '\'' +
+                ", KH_Password='" + KH_Password + '\'' +
+                '}';
+    }
 }
 

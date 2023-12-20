@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottom_nav;
     private ViewPager2 mViewPager2;
     public static List<GioHangViewModel> gioHangViewModels;
+    private Boolean purchased, notIsLoggin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,18 @@ public class MainActivity extends AppCompatActivity {
         bottom_nav = findViewById(R.id.bottom_nav);
         mViewPager2 = findViewById(R.id.view_pager);
         setUpViewPage();
+        Intent in = getIntent();
+        purchased = in.getBooleanExtra("purchased", false);
+        notIsLoggin = in.getBooleanExtra("notIsLoggin", false);
+        if(purchased){
+            setFragment(2, R.id.action_order);
+            purchased = false;
+        }
+        if(notIsLoggin){
+            setFragment(3, R.id.action_user);
+            notIsLoggin = false;
+        }
+
 
         if(gioHangViewModels != null){
 
@@ -94,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
     private void setUpViewPage() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         mViewPager2.setAdapter(viewPagerAdapter);
+    }
+
+    private void setFragment(int fragment, int item){
+        mViewPager2.setCurrentItem(fragment);
+        bottom_nav.getMenu().findItem(item).setChecked(true);
     }
 
     private String getUserName() {

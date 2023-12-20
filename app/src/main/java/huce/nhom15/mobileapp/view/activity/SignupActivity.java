@@ -18,7 +18,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import huce.nhom15.mobileapp.R;
+import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.API.IApiService;
 import huce.nhom15.mobileapp.view.ModelRespone.RegisterRespone;
 import huce.nhom15.mobileapp.view.fragment.DetailUserFragment;
@@ -106,10 +109,26 @@ public class SignupActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (registerRespone.getError().equals("200")) {
                         Toast.makeText(SignupActivity.this, registerRespone.getMessage(), Toast.LENGTH_SHORT).show();
-                        saveRegisterState();
-                        saveUsername(username);
-                        finish();
-                        isSignupSuccess = true;
+                        IApiService.api.getUser(email).enqueue(new Callback<Customer>() {
+                            @Override
+                            public void onResponse(Call<Customer> call, Response<Customer> response) {
+                                Customer customer = response.body();
+                                if(customer != null){
+                                    Gson gson = new Gson();
+                                    String user = gson.toJson(customer);
+                                    saveRegisterState();
+                                    saveUsername(user);
+                                    finish();
+                                    isSignupSuccess = true;
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Customer> call, Throwable t) {
+                                Toast.makeText(SignupActivity.this, "Lấy thông tin khách hàng khong thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     } else {
                         Toast.makeText(SignupActivity.this, registerRespone.getMessage(), Toast.LENGTH_SHORT).show();
                         isSignupSuccess = false;
@@ -135,6 +154,5 @@ public class SignupActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
         editor.putString("username", username);
         editor.apply();
-
     }
 }

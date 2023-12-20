@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import huce.nhom15.mobileapp.R;
+import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.ModelRespone.LogoutListener;
 
 public class DetailUserFragment extends Fragment implements LogoutListener {
@@ -32,18 +36,20 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
         linearLayoutCompat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 logout();
+                 onLogout();
             }
         });
         txtUsername = view.findViewById(R.id.txtusername);
-        String name = getUserName();
-        txtUsername.setText(name);
+        String user = getUserName();
+        Gson gson = new Gson();
+        Customer customer = gson.fromJson(user, Customer.class);
+        txtUsername.setText(customer.getKH_HoTen());
         // Set thông tin người dùng cho TextView
         return view;
     }
 
-    private void logout() {
-         //Xóa trạng thái đăng nhập khi logout
+    @Override
+    public void onLogout() {
         clearLoginState();
         clearRegisterState();
         if (logoutListener != null) {
@@ -51,6 +57,7 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
         }
         clearUsername();
         popBackStackToUserFragment();
+        OrderFragment.evenShowOrder();
         Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show();
     }
     private void clearLoginState() {
@@ -60,9 +67,13 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
     }
 
     private void popBackStackToUserFragment() {
-        // Sử dụng FragmentManager để quay lại UserFragment
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-        fragmentManager.popBackStack("UserFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        UserFragment userFragment = new UserFragment();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.blankaccount, userFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
     private void clearRegisterState() {
         SharedPreferences.Editor editor = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
@@ -78,8 +89,5 @@ public class DetailUserFragment extends Fragment implements LogoutListener {
         SharedPreferences prefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         return prefs.getString("username", "");
     }
-    @Override
-    public void onLogout() {
 
-    }
 }

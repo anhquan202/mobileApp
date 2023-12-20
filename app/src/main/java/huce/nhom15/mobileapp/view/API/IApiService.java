@@ -12,6 +12,7 @@ import huce.nhom15.mobileapp.view.ModelRespone.RegisterRespone;
 import huce.nhom15.mobileapp.viewmodel.CategoryViewModel;
 import huce.nhom15.mobileapp.viewmodel.ChiTietSPViewModel;
 import huce.nhom15.mobileapp.view.ModelRespone.SetNewPassRespone;
+import huce.nhom15.mobileapp.viewmodel.OrderViewModel;
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -25,7 +26,7 @@ import retrofit2.http.Query;
 public interface IApiService {
     Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
     IApiService api = new Retrofit.Builder()
-            .baseUrl("http://192.168.50.1:8080/backend/")
+            .baseUrl("http://192.168.1.2:8080/backend/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IApiService.class);
@@ -42,6 +43,10 @@ public interface IApiService {
 
     @GET("getThongTinCTSP.php")
     Call<ChiTietSPViewModel> getThongTinCTSP(@Query("SP_MaSP") int maSP);
+    @GET("getOrder.php")
+    Call<List<OrderViewModel>> getOrder(@Query("KH_MaKH") int KH_MaKH);
+    @GET("getUser.php")
+    Call<Customer> getUser(@Query("KH_Email") String KH_Email);
     @FormUrlEncoded
     @POST("login.php")
     Call<LoginRespone> login(
@@ -63,6 +68,22 @@ public interface IApiService {
     Call<SetNewPassRespone> setnewpwd(
             @Field("KH_Email") String email,
             @Field("KH_Password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("addHoaDon.php")
+    Call<Integer> addHoaDon(
+            @Field("KH_MaKH") int KH_MaKH,
+            @Field("TenNguoiDat") String TenNguoiDat,
+            @Field("TenNguoiNhan") String TenNguoiNhan,
+            @Field("SDT") String SDT,
+            @Field("DiaChi") String DiaChi
+    );
+    @FormUrlEncoded
+    @POST("ThanhToan.php")
+    Call<String> ThanhToan(
+            @Field("MaHD") int MaHD,
+            @Field("MangGioHang") String MangGioHang
     );
     //@GET("searchSPByName.php")
     //Call<List<SanPhamViewModel>> getListSanPhamSearch(String tensp, int currentPage);

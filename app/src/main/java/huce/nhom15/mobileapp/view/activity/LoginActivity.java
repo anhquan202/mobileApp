@@ -18,7 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import huce.nhom15.mobileapp.R;
+import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.API.IApiService;
 import huce.nhom15.mobileapp.view.ModelRespone.LoginRespone;
 import retrofit2.Call;
@@ -47,11 +50,6 @@ public class LoginActivity extends AppCompatActivity{
                 return false;
             }
         });
-        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        if (prefs.getBoolean("isLoggedIn", false)) {
-            // Nếu đã đăng nhập, xóa giá trị username
-            clearUsername();
-        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,11 +105,14 @@ public class LoginActivity extends AppCompatActivity{
                 LoginRespone loginRespone = response.body();
                 if (response.isSuccessful()) {
                     if (loginRespone.getError().equals("200")) {
-                        String username = loginRespone.getUser().toString();
+                        Customer customer = loginRespone.getCustomer();
                         Toast.makeText(LoginActivity.this, loginRespone.getMessage(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(LoginActivity.this, username, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, customer.toString(), Toast.LENGTH_SHORT).show();
+                        Gson gson = new Gson();
+                        String user = gson.toJson(customer);
+
                         saveLoginState();
-                        saveUsername(username);
+                        saveUsername(user);
                         finish();
                         isLoginSuccess = true;
 
@@ -144,9 +145,9 @@ public class LoginActivity extends AppCompatActivity{
         editor.putBoolean("isLoggedIn", true);
         editor.apply();
     }
-    private void saveUsername(String username) {
+    private void saveUsername(String user) {
         SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
-        editor.putString("username", username);
+        editor.putString("username", user);
         editor.apply();
     }
 
