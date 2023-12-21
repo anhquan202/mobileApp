@@ -127,7 +127,7 @@ public class GioHangActivity extends AppCompatActivity {
                     boolean kt = SDT.matches(reg);
 
                     if (kt == false) {
-                        Toast.makeText(GioHangActivity.this, "Số điện thoại không đúng định dạng(SDT phải có 10 số)", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(GioHangActivity.this, "Số điện thoại không đúng định dạng và SDT phải có 10 số", Toast.LENGTH_SHORT).show();
                     } else {
                         IApiService.api.addHoaDon(Integer.parseInt(KH_MaKH), TenNguoiDat, TenNguoiNhan, SDT, DiaChi).enqueue(new Callback<Integer>() {
                             @Override
@@ -158,7 +158,7 @@ public class GioHangActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<Integer> call, Throwable t) {
-                                Toast.makeText(GioHangActivity.this, "Call API fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(GioHangActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

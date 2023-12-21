@@ -25,7 +25,7 @@ import retrofit2.http.Query;
 public interface IApiService {
     Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy").create();
     IApiService api = new Retrofit.Builder()
-            .baseUrl("http://192.168.98.27:8081/backend/")
+            .baseUrl("http://192.168.6.1:8080/backend/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IApiService.class);

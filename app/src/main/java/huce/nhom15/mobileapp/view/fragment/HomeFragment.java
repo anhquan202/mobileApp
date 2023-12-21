@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import java.util.List;
 import huce.nhom15.mobileapp.R;
 import huce.nhom15.mobileapp.view.API.IApiService;
 import huce.nhom15.mobileapp.view.activity.GioHangActivity;
+import huce.nhom15.mobileapp.view.activity.MainActivity;
 import huce.nhom15.mobileapp.view.activity.SearchActivity;
 import huce.nhom15.mobileapp.view.adapter.SanPhamTCAdapter;
 import huce.nhom15.mobileapp.viewmodel.SanPhamViewModel;
@@ -34,6 +36,7 @@ import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
+    private View view;
     private RecyclerView rcv_tc;
     private List<SanPhamViewModel> sanphams;
     private SanPhamTCAdapter sanPhamTCAdapter;
@@ -41,6 +44,8 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private EditText edtsearch;
     private ImageView imgGioHang;
+    private RelativeLayout layoutIconGioHang;
+    private TextView tvSoSP;
     public HomeFragment(Context ct) {
         this.ct = ct;
     }
@@ -51,15 +56,16 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home,container,false);
-        rcv_tc = view.findViewById(R.id.rcv_TC);
-        edtsearch = view.findViewById(R.id.edtsearch);
-        progressBar = view.findViewById(R.id.progressBar_TC);
-        imgGioHang = view.findViewById(R.id.toolbarTC).findViewById(R.id.imgGioHang);
+        view = inflater.inflate(R.layout.fragment_home,container,false);
+        khoiTao();
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ct, 2);
         rcv_tc.setLayoutManager(gridLayoutManager);
+
+        tvSoSP.setText(MainActivity.gioHangViewModels.size()+"");
+
         callApi();
-        imgGioHang.setOnClickListener(new View.OnClickListener() {
+        layoutIconGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(ct, GioHangActivity.class);
@@ -68,6 +74,14 @@ public class HomeFragment extends Fragment {
         });
         timKiemSanPham();
         return view;
+    }
+
+    private void khoiTao() {
+        rcv_tc = view.findViewById(R.id.rcv_TC);
+        edtsearch = view.findViewById(R.id.edtsearch);
+        progressBar = view.findViewById(R.id.progressBar_TC);
+        layoutIconGioHang = view.findViewById(R.id.toolbarTC).findViewById(R.id.layoutIconGioHang);
+        tvSoSP = view.findViewById(R.id.toolbarTC).findViewById(R.id.tvSoSP);
     }
 
     private void timKiemSanPham() {
@@ -110,5 +124,11 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(ct, "onFail", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        tvSoSP.setText(MainActivity.gioHangViewModels.size()+"");
     }
 }

@@ -17,14 +17,16 @@ public class OrderViewModel implements Serializable{
     private String tensp;
     private String giasp;
     private String soluong;
+    private String trangthai;
     public OrderViewModel() {
     }
 
-    public OrderViewModel(String anhsp, String tensp, String giasp, String soluong) {
+    public OrderViewModel(String anhsp, String tensp, String giasp, String soluong, String trangthai) {
         this.anhsp = anhsp;
         this.tensp = tensp;
         this.giasp = giasp;
         this.soluong = soluong;
+        this.trangthai = trangthai;
     }
 
     public String getAnhsp() {
@@ -58,6 +60,14 @@ public class OrderViewModel implements Serializable{
 
     public void setSoluong(String soluong) {
         this.soluong = soluong;
+    }
+
+    public String getTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(String trangthai) {
+        this.trangthai = trangthai;
     }
 
     @Override

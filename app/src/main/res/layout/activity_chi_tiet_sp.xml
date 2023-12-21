@@ -14,7 +14,7 @@
         android:background="#E3DAE6">
         <include
             android:id="@+id/header"
-            layout="@layout/custom_header" />
+            layout="@layout/header_sanpham_category" />
 
         <LinearLayout
             android:id="@+id/layoutChiTiet"

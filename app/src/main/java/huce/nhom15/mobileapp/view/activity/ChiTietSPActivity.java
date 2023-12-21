@@ -95,6 +95,7 @@ public class ChiTietSPActivity extends AppCompatActivity {
                     long giaMoi = soLuongMua * Integer.parseInt(giaConvert);
                     MainActivity.gioHangViewModels.add(new GioHangViewModel(sanPhamViewModel.getId(), sanPhamViewModel.getAnhsp(), sanPhamViewModel.getTensp(), giaMoi+"", soLuongMua+"", sanPhamViewModel.getSoluong()));
                 }
+                activityChiTietSpBinding.header.tvSoSP.setText(MainActivity.gioHangViewModels.size()+"");
                 showDialogConfirm();
 
             }
@@ -226,5 +227,13 @@ public class ChiTietSPActivity extends AppCompatActivity {
         activityChiTietSpBinding.tvGiaSPOfChiTietSanPham.setText("Giá: " + sanPhamViewModel.getGiasp() + " Đ");
         activityChiTietSpBinding.tvSoLuongSP.setText(sanPhamViewModel.getSoluong());
         activityChiTietSpBinding.tvSoLuongMua.setText(soLuongMua+"");
+        activityChiTietSpBinding.header.tvHeader.setText("Chi tiết sản phẩm");
+        activityChiTietSpBinding.header.tvSoSP.setText(MainActivity.gioHangViewModels.size()+"");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityChiTietSpBinding.header.tvSoSP.setText(MainActivity.gioHangViewModels.size()+"");
     }
 }

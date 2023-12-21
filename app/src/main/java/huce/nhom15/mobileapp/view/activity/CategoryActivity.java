@@ -35,7 +35,7 @@ import retrofit2.Response;
 
 public class CategoryActivity extends AppCompatActivity {
     private int maLoai;
-    private TextView tvHeaderProductCategory;
+    private TextView tvHeaderProductCategory, tvSoSP;
     private ImageView clickBack, imgShoppingCart;
     private ProductCategoryAdapter productCategoryAdapter;
     private  List<SanPhamViewModel> sanphams;
@@ -52,15 +52,22 @@ public class CategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
         khoiTao();
         onClickBack();
         clickImgShoppingCart();
+
+        tvSoSP.setText(MainActivity.gioHangViewModels.size()+"");
+
         CategoryViewModel categoryViewModel = (CategoryViewModel) getIntent().getExtras().get("category");
         tvHeaderProductCategory.setText(categoryViewModel.getTenLoaiSP());
         maLoai = Integer.parseInt(categoryViewModel.getId());
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         rcvProductCategory.setLayoutManager(gridLayoutManager);
+
         ct = this;
+
         callApi(maLoai, currentPage);
         recycleViewScroll(gridLayoutManager);
     }
@@ -104,18 +111,23 @@ public class CategoryActivity extends AppCompatActivity {
                 IApiService.api.getListProductCategory(maLoai, currentPage).enqueue(new Callback<List<SanPhamViewModel>>() {
                     @Override
                     public void onResponse(Call<List<SanPhamViewModel>> call, Response<List<SanPhamViewModel>> response) {
-                        productCategoryAdapter.removeFooterLoading();
                         List<SanPhamViewModel> list = response.body();
-                        sanphams.addAll(list);
-                        productCategoryAdapter.notifyDataSetChanged();
-                        isLoading=false;
-                        productCategoryAdapter.addFooterLoading();
+                        if(list.size() > 0){
+                            productCategoryAdapter.removeFooterLoading();
+                            sanphams.addAll(list);
+                            productCategoryAdapter.notifyDataSetChanged();
+                            isLoading=false;
+                            productCategoryAdapter.addFooterLoading();
+                        }else{
+                            isLastPage = true;
+                            productCategoryAdapter.removeFooterLoading();
+                            Toast.makeText(ct, "Đã load hết dữ liệu", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     @Override
                     public void onFailure(Call<List<SanPhamViewModel>> call, Throwable t) {
-                        isLastPage = true;
-                        productCategoryAdapter.removeFooterLoading();
-                        Toast.makeText(ct, "Đã load hết dữ liệu", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CategoryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -130,16 +142,20 @@ public class CategoryActivity extends AppCompatActivity {
             public void onResponse(Call<List<SanPhamViewModel>> call, Response<List<SanPhamViewModel>> response) {
                 pgbProductCategoryr.setVisibility(View.INVISIBLE);
                 sanphams = response.body();
-                productCategoryAdapter = new ProductCategoryAdapter(sanphams, ct);
-                rcvProductCategory.setAdapter(productCategoryAdapter);
-                productCategoryAdapter.addFooterLoading();
-
+                if(sanphams.size() > 0){
+                    productCategoryAdapter = new ProductCategoryAdapter(sanphams, ct);
+                    rcvProductCategory.setAdapter(productCategoryAdapter);
+                    productCategoryAdapter.addFooterLoading();
+                }
+                else{
+                    Toast.makeText(CategoryActivity.this, "Sản phẩm thuộc loại này đã hết", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<List<SanPhamViewModel>> call, Throwable t) {
                 pgbProductCategoryr.setVisibility(View.INVISIBLE);
-                Toast.makeText(ct, "Call API fail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ct, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -159,5 +175,12 @@ public class CategoryActivity extends AppCompatActivity {
         pgbProductCategoryr = findViewById(R.id.pgbProductCategory);
         rcvProductCategory = findViewById(R.id.rcvProductCategory);
         imgShoppingCart = findViewById(R.id.imgShoppingCart);
+        tvSoSP = findViewById(R.id.headerProductCategory).findViewById(R.id.tvSoSP);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tvSoSP.setText(MainActivity.gioHangViewModels.size()+"");
     }
 }

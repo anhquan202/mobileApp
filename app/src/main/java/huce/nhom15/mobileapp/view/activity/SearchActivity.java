@@ -51,8 +51,9 @@ public class SearchActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean productNotFound = true;
     private ScrollView scrollView;
-    private ImageView pNotFound, imgGioHang;
+    private ImageView pNotFound;
     private FrameLayout foundProduct;
+    private RelativeLayout layoutIconGioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void clickGioHang() {
-        imgGioHang.setOnClickListener(new View.OnClickListener() {
+        layoutIconGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(SearchActivity.this, GioHangActivity.class);
@@ -140,18 +141,23 @@ public class SearchActivity extends AppCompatActivity {
                 IApiService.api.getListSanPhamSearch(tensp, currentPage).enqueue(new Callback<List<SanPhamViewModel>>() {
                     @Override
                     public void onResponse(Call<List<SanPhamViewModel>> call, Response<List<SanPhamViewModel>> response) {
-                        sanPhamSearchAdapter.removeFooterLoading();
                         List<SanPhamViewModel> list = response.body();
-                        sanphams.addAll(list);
-                        sanPhamSearchAdapter.notifyDataSetChanged();
-                        isLoading=false;
-                        sanPhamSearchAdapter.addFooterLoading();
+                        if(list.size() > 0){
+                            sanPhamSearchAdapter.removeFooterLoading();
+                            sanphams.addAll(list);
+                            sanPhamSearchAdapter.notifyDataSetChanged();
+                            isLoading=false;
+                            sanPhamSearchAdapter.addFooterLoading();
+                        }else{
+                            isLastPage = true;
+                            sanPhamSearchAdapter.removeFooterLoading();
+                            Toast.makeText(ct, "Đã load hết dữ liệu", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     @Override
                     public void onFailure(Call<List<SanPhamViewModel>> call, Throwable t) {
-                        isLastPage = true;
-                        sanPhamSearchAdapter.removeFooterLoading();
-                        Toast.makeText(ct, "Đã load hết dữ liệu", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -165,24 +171,30 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<List<SanPhamViewModel>> call, Response<List<SanPhamViewModel>> response) {
                 progressBar.setVisibility(View.INVISIBLE);
                 sanphams = response.body();
-                sanPhamSearchAdapter = new SanPhamSearchAdapter(sanphams, ct);
-                rcvSearch.setAdapter(sanPhamSearchAdapter);
-                sanPhamSearchAdapter.addFooterLoading();
-                productNotFound = false;
+                if(sanphams.size() > 0){
+                    sanPhamSearchAdapter = new SanPhamSearchAdapter(sanphams, ct);
+                    rcvSearch.setAdapter(sanPhamSearchAdapter);
+                    sanPhamSearchAdapter.addFooterLoading();
+                    productNotFound = false;
+                }
+                else{
+                    isLastPage = true;
+                    if(productNotFound){
+
+                        pNotFound.setVisibility(View.VISIBLE);
+                        pNotFound.setImageResource(product_notfound);
+                        scrollView.setVisibility(View.GONE);
+                        sanPhamSearchAdapter = new SanPhamSearchAdapter();
+                        rcvSearch.setAdapter(sanPhamSearchAdapter);
+                    }
+                }
+
             }
 
             @Override
             public void onFailure(Call<List<SanPhamViewModel>> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
-                isLastPage = true;
-                if(productNotFound){
-
-                    pNotFound.setVisibility(View.VISIBLE);
-                    pNotFound.setImageResource(product_notfound);
-                    scrollView.setVisibility(View.GONE);
-                    sanPhamSearchAdapter = new SanPhamSearchAdapter();
-                    rcvSearch.setAdapter(sanPhamSearchAdapter);
-                }
+                Toast.makeText(SearchActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -204,6 +216,6 @@ public class SearchActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView);
         pNotFound = findViewById(R.id.productnotfound);
         foundProduct = findViewById(R.id.foundproduct);
-        imgGioHang = findViewById(R.id.include).findViewById(R.id.imgGioHang);
+        layoutIconGioHang = findViewById(R.id.include).findViewById(R.id.layoutIconGioHang);
     }
 }
