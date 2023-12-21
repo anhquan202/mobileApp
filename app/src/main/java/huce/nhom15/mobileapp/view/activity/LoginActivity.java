@@ -2,23 +2,33 @@ package huce.nhom15.mobileapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import huce.nhom15.mobileapp.R;
+import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.API.IApiService;
 import huce.nhom15.mobileapp.view.ModelRespone.LoginRespone;
 import retrofit2.Call;
@@ -30,15 +40,16 @@ public class LoginActivity extends AppCompatActivity{
     private EditText edUserEmail;
     private EditText edPassword;
     private Button btnLogin, btnForgotPwd;
+    private TextView tvHeader;
+    private ImageView imgCart;
+    ConstraintLayout cl;
     public Boolean isLoginSuccess = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-        ConstraintLayout cl = findViewById(R.id.header);
-        TextView tvHeader = cl.findViewById(R.id.tvHeader);
-        tvHeader.setText(getString(R.string.txtLogin));
+        resetUIHeader();
         ConstraintLayout constraintLayout = findViewById(R.id.loginLayout);
         constraintLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -47,11 +58,6 @@ public class LoginActivity extends AppCompatActivity{
                 return false;
             }
         });
-        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        if (prefs.getBoolean("isLoggedIn", false)) {
-            // Nếu đã đăng nhập, xóa giá trị username
-            clearUsername();
-        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +68,7 @@ public class LoginActivity extends AppCompatActivity{
         btnForgotPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SetNewpassActivity.class);
+                Intent intent = new Intent(view.getContext(), SetNewpassActivity.class);
                 startActivity(intent);
             }
         });
@@ -73,7 +79,15 @@ public class LoginActivity extends AppCompatActivity{
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    public void resetUIHeader(){
+        cl = findViewById(R.id.header);
+        cl.setBackgroundColor(Color.TRANSPARENT);
+        tvHeader = cl.findViewById(R.id.tvHeader);
+        tvHeader.setText(getString(R.string.txtLogin));
+        imgCart = cl.findViewById(R.id.imgShoppingCart);
+        imgCart.setVisibility(View.INVISIBLE);
 
+    }
     public void init() {
         try {
             btnLogin = findViewById(R.id.login);
@@ -86,7 +100,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     public boolean login() {
-        init();
+        //init();
         String email = edUserEmail.getText().toString().trim();
         String password = edPassword.getText().toString().trim();
         if (email.isEmpty() || password.isEmpty()) {
@@ -107,10 +121,14 @@ public class LoginActivity extends AppCompatActivity{
                 LoginRespone loginRespone = response.body();
                 if (response.isSuccessful()) {
                     if (loginRespone.getError().equals("200")) {
-                        String username = loginRespone.getUser().toString();
+                        Customer customer = loginRespone.getCustomer();
                         Toast.makeText(LoginActivity.this, loginRespone.getMessage(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, customer.toString(), Toast.LENGTH_SHORT).show();
+                        Gson gson = new Gson();
+                        String user = gson.toJson(customer);
+
                         saveLoginState();
-                        saveUsername(username);
+                        saveUsername(user);
                         finish();
                         isLoginSuccess = true;
 
@@ -126,26 +144,19 @@ public class LoginActivity extends AppCompatActivity{
             }
             @Override
             public void onFailure(Call<LoginRespone> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(LoginActivity.this, "Vui lòng kiểm tra lại mạng của bạn"  , Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, t.getMessage() , Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    private void clearUsername() {
-        SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
-        editor.remove("username");
-        editor.apply();
-    }
-    // Lưu trạng thái đăng nhập
     private void saveLoginState() {
         SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
         editor.putBoolean("isLoggedIn", true);
         editor.apply();
     }
-    private void saveUsername(String username) {
+    private void saveUsername(String user) {
         SharedPreferences.Editor editor = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
-        editor.putString("username", username);
+        editor.putString("username", user);
         editor.apply();
     }
 

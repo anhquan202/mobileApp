@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/HoaDon"
+    android:background="#feeae9"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:src="@drawable/bghoadon"
+            android:adjustViewBounds="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="THông tin địa chỉ"
+                android:textAllCaps="true"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/tvMaKH"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:paddingStart="20dp"
+                android:text="Mã khách hàng"
+                android:background="@color/edthoadon"
+                android:textColorHint="@color/placeholder"
+                android:textColor="@color/text"
+                android:gravity="center"
+                android:visibility="gone"
+                />
+            <TextView
+                android:id="@+id/tvTenNguoiDat"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:paddingStart="20dp"
+                android:text="Tên người đặt"
+                android:textSize="20sp"
+                android:gravity="start|center"
+                android:background="@color/edthoadon"
+                android:textColorHint="@color/placeholder"
+                android:textColor="@color/text"
+                android:enabled="false"
+                />
+            <EditText
+                android:id="@+id/edtTenNguoiNhan"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:paddingStart="20dp"
+                android:hint="Tên người nhận"
+                android:textSize="20sp"
+                android:background="@color/edthoadon"
+                android:textColorHint="@color/placeholder"
+                android:textColor="@color/text"
+                android:focusableInTouchMode="true"
+                />
+
+            <EditText
+                android:id="@+id/edtSDT"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:paddingStart="20dp"
+                android:hint="Số điện thoại"
+                android:textSize="20sp"
+                android:background="@color/edthoadon"
+                android:textColorHint="@color/placeholder"
+                android:textColor="@color/text"
+                android:focusableInTouchMode="true"
+                />
+            <EditText
+                android:id="@+id/edtDiaChi"
+                android:inputType="text"
+                android:importantForAutofill="no"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:paddingStart="20dp"
+                android:hint="Địa chỉ"
+                android:background="@color/edthoadon"
+                android:textColorHint="@color/placeholder"
+                android:textColor="@color/text"
+                android:focusableInTouchMode="true"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="32dp">
+                <Button
+                    android:id="@+id/btnThanhToan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:text="Thanh toán"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text"
+                    android:background="@drawable/radius"
+                    app:backgroundTint="#BF5151"
+                    tools:ignore="MissingConstraints" />
+                <Button
+                    android:id="@+id/btnBack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:text="Quay lại"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text"
+                    android:background="@drawable/radius"
+                    app:backgroundTint="#BF937184"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+
+
+
+</androidx.core.widget.NestedScrollView>

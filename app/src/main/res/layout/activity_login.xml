@@ -12,7 +12,7 @@
     <include
         android:id="@+id/header"
         layout="@layout/custom_header"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="40dp"
         android:background="@color/button"
         android:focusableInTouchMode="true"
@@ -67,6 +67,7 @@
         android:background="@drawable/radius"
         app:backgroundTint="@color/button"
         android:text="@string/txtLogin"
+        android:textAllCaps="true"
         android:textColor="@color/text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -83,6 +84,7 @@
         android:background="@drawable/radius"
         app:backgroundTint="@color/button"
         android:text="@string/txtforgotPass"
+        android:textAllCaps="true"
         android:textColor="@color/text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -98,6 +100,5 @@
         android:layout_marginEnd="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnForgotPass" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,10 +2,10 @@ package huce.nhom15.mobileapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -14,12 +14,16 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import huce.nhom15.mobileapp.R;
+import huce.nhom15.mobileapp.model.Customer;
 import huce.nhom15.mobileapp.view.API.IApiService;
 import huce.nhom15.mobileapp.view.ModelRespone.RegisterRespone;
 import huce.nhom15.mobileapp.view.fragment.DetailUserFragment;
@@ -36,15 +40,15 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignup;
     private RadioGroup genderGroup;
     public Boolean isSignupSuccess = false;
-
+    private TextView tvHeader;
+    private ImageView imgCart;
+    ConstraintLayout cl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         init();
-        ConstraintLayout cl = findViewById(R.id.header);
-        TextView tvHeader = cl.findViewById(R.id.tvHeader);
-        tvHeader.setText(getString(R.string.txtSignup));
+        resetUIHeader();
         ConstraintLayout constraintLayout = findViewById(R.id.registerLayout);
         constraintLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -72,7 +76,15 @@ public class SignupActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+    public void resetUIHeader(){
+        cl =findViewById(R.id.header);
+        cl.setBackgroundColor(Color.TRANSPARENT);
+        tvHeader = cl.findViewById(R.id.tvHeader);
+        tvHeader.setText(getString(R.string.txtSignup));
+        imgCart = cl.findViewById(R.id.imgShoppingCart);
+        imgCart.setVisibility(View.INVISIBLE);
 
+    }
     public void init() {
         try {
             edUsername = findViewById(R.id.edUsername);
@@ -108,10 +120,26 @@ public class SignupActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (registerRespone.getError().equals("200")) {
                         Toast.makeText(SignupActivity.this, registerRespone.getMessage(), Toast.LENGTH_SHORT).show();
-                        saveRegisterState();
-                        saveUsername(username);
-                        finish();
-                        isSignupSuccess = true;
+                        IApiService.api.getUser(email).enqueue(new Callback<Customer>() {
+                            @Override
+                            public void onResponse(Call<Customer> call, Response<Customer> response) {
+                                Customer customer = response.body();
+                                if(customer != null){
+                                    Gson gson = new Gson();
+                                    String user = gson.toJson(customer);
+                                    saveRegisterState();
+                                    saveUsername(user);
+                                    finish();
+                                    isSignupSuccess = true;
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Customer> call, Throwable t) {
+                                Toast.makeText(SignupActivity.this, "Lấy thông tin khách hàng khong thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     } else {
                         Toast.makeText(SignupActivity.this, registerRespone.getMessage(), Toast.LENGTH_SHORT).show();
                         isSignupSuccess = false;
