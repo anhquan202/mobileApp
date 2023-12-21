@@ -95,7 +95,7 @@ public class OrderFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<List<OrderViewModel>> call, Throwable t) {
-                    Toast.makeText(ct, "Call API fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ct, "Mất kết nối, vui lòng kiểm tra mạng của bạn", Toast.LENGTH_SHORT).show();
                 }
             });
         }else{

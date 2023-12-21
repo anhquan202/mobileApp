@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<List<SanPhamViewModel>> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(ct, "onFail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ct, "Mất kết nối, vui lòng kiểm tra mạng của bạn", Toast.LENGTH_SHORT).show();
             }
         });
     }

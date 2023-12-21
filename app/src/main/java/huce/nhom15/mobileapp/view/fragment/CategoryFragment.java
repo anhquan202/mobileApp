@@ -68,7 +68,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onFailure(Call<List<CategoryViewModel>> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(ct, "Call API fail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ct, "Mất kết nối, vui lòng kiểm tra mạng của bạn", Toast.LENGTH_SHORT).show();
             }
         });
     }
