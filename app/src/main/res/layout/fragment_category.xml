@@ -26,19 +26,19 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleHeaderCategory"
-        android:background="#635A13CC">
+        android:background="@color/backgroud_body">
         <ProgressBar
             android:id="@+id/progressBarCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
 
-            />
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

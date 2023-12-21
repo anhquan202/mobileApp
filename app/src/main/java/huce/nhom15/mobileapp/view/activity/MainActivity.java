@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,13 +16,19 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import huce.nhom15.mobileapp.R;
 import huce.nhom15.mobileapp.view.adapter.ViewPagerAdapter;
 import huce.nhom15.mobileapp.view.animation.DepthPageTransformer;
+import huce.nhom15.mobileapp.viewmodel.GioHangViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottom_nav;
     private ViewPager2 mViewPager2;
+    public static List<GioHangViewModel> gioHangViewModels;
+    private Boolean purchased, notIsLoggin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +36,24 @@ public class MainActivity extends AppCompatActivity {
         bottom_nav = findViewById(R.id.bottom_nav);
         mViewPager2 = findViewById(R.id.view_pager);
         setUpViewPage();
+        Intent in = getIntent();
+        purchased = in.getBooleanExtra("purchased", false);
+        notIsLoggin = in.getBooleanExtra("notIsLoggin", false);
+        if(purchased){
+            setFragment(2, R.id.action_order);
+            purchased = false;
+        }
+        if(notIsLoggin){
+            setFragment(3, R.id.action_user);
+            notIsLoggin = false;
+        }
+
+
+        if(gioHangViewModels != null){
+
+        }else{
+            gioHangViewModels = new ArrayList<>();
+        }
 
         mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -81,5 +107,19 @@ public class MainActivity extends AppCompatActivity {
     private void setUpViewPage() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         mViewPager2.setAdapter(viewPagerAdapter);
+    }
+
+    private void setFragment(int fragment, int item){
+        mViewPager2.setCurrentItem(fragment);
+        bottom_nav.getMenu().findItem(item).setChecked(true);
+    }
+
+    private String getUserName() {
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return prefs.getString("username", "");
+    }
+    private boolean checkLogin() {
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return prefs.getBoolean("isLoggedIn", false);
     }
 }

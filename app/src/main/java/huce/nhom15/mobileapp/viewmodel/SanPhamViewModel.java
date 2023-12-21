@@ -58,7 +58,7 @@ public class SanPhamViewModel implements Serializable{
 
     public String getGiasp() {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        return "Giá: "+decimalFormat.format(Integer.parseInt(giasp))+" Đ";
+        return decimalFormat.format(Integer.parseInt(giasp));
     }
 
     public void setGiasp(String giasp) {

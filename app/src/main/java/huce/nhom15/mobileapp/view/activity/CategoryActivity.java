@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -35,7 +36,7 @@ import retrofit2.Response;
 public class CategoryActivity extends AppCompatActivity {
     private int maLoai;
     private TextView tvHeaderProductCategory;
-    private ImageView clickBack;
+    private ImageView clickBack, imgShoppingCart;
     private ProductCategoryAdapter productCategoryAdapter;
     private  List<SanPhamViewModel> sanphams;
     private Context ct;
@@ -53,6 +54,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
         khoiTao();
         onClickBack();
+        clickImgShoppingCart();
         CategoryViewModel categoryViewModel = (CategoryViewModel) getIntent().getExtras().get("category");
         tvHeaderProductCategory.setText(categoryViewModel.getTenLoaiSP());
         maLoai = Integer.parseInt(categoryViewModel.getId());
@@ -61,6 +63,16 @@ public class CategoryActivity extends AppCompatActivity {
         ct = this;
         callApi(maLoai, currentPage);
         recycleViewScroll(gridLayoutManager);
+    }
+
+    private void clickImgShoppingCart() {
+        imgShoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(CategoryActivity.this, GioHangActivity.class);
+                startActivity(in);
+            }
+        });
     }
 
     private void recycleViewScroll(GridLayoutManager gridLayoutManager) {
@@ -146,5 +158,6 @@ public class CategoryActivity extends AppCompatActivity {
         clickBack = findViewById(R.id.imgBack);
         pgbProductCategoryr = findViewById(R.id.pgbProductCategory);
         rcvProductCategory = findViewById(R.id.rcvProductCategory);
+        imgShoppingCart = findViewById(R.id.imgShoppingCart);
     }
 }
