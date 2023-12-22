@@ -87,9 +87,10 @@ public class OrderFragment extends Fragment {
                         }else{
                             imgEmptyOrder.setVisibility(View.INVISIBLE);
                             scrollViewOrder.setVisibility(View.VISIBLE);
+                            orderAdapter = new OrderAdapter(orderViewModels, ct);
+                            rcvOrder.setAdapter(orderAdapter);
                         }
-                        orderAdapter = new OrderAdapter(orderViewModels, ct);
-                        rcvOrder.setAdapter(orderAdapter);
+
                     }
                 }
 

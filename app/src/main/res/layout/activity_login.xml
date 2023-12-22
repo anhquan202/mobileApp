@@ -12,11 +12,12 @@
     <include
         android:id="@+id/header"
         layout="@layout/custom_header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="IncludeLayoutParam"
         tools:viewBindingIgnore="true" />
 
     <EditText
